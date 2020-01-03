@@ -1,0 +1,24 @@
+12-31 00:35 root         INFO     Temp directory is: /var/folders/hg/7_08r35x6yz1287dc3mg4xfc0000gn/T/pamPredict_87dt0sh1
+12-31 00:35 root         INFO     Retriving fastas- forward and reverse from a genbanke file
+12-31 00:35 root         ERROR    predictPAM terminated with errors. See the log file for details.
+12-31 00:35 root         ERROR    [Errno 21] Is a directory: '/'
+12-31 00:35 root         INFO     Temp directory is: /var/folders/hg/7_08r35x6yz1287dc3mg4xfc0000gn/T/pamPredict_88q0s2te
+12-31 00:35 root         INFO     Retriving fastas- forward and reverse from a genbanke file
+12-31 00:35 root         ERROR    predictPAM terminated with errors. See the log file for details.
+12-31 00:35 root         ERROR    [Errno 21] Is a directory: '/'
+12-31 00:35 root         INFO     Temp directory is: /var/folders/hg/7_08r35x6yz1287dc3mg4xfc0000gn/T/pamPredict_hpt47qsq
+12-31 00:35 root         INFO     Retriving fastas- forward and reverse from a genbanke file
+12-31 00:35 root         ERROR    predictPAM terminated with errors. See the log file for details.
+12-31 00:35 root         ERROR    [Errno 21] Is a directory: '/'
+01-03 12:23 root         INFO     Temp directory is: /var/folders/hg/7_08r35x6yz1287dc3mg4xfc0000gn/T/pamPredict_25aqaogh
+01-03 12:23 root         INFO     Retriving fastas- forward and reverse from a genbanke file
+01-03 12:23 root         ERROR    predictPAM terminated with errors. See the log file for details.
+01-03 12:23 root         ERROR    [Errno 21] Is a directory: '/'
+01-03 12:24 root         INFO     Temp directory is: /var/folders/hg/7_08r35x6yz1287dc3mg4xfc0000gn/T/pamPredict_1f5jxi8q
+01-03 12:24 root         INFO     Retriving fastas- forward and reverse from a genbanke file
+01-03 12:24 root         ERROR    predictPAM terminated with errors. See the log file for details.
+01-03 12:24 root         ERROR    [Errno 21] Is a directory: '/'
+01-03 12:24 root         INFO     Temp directory is: /var/folders/hg/7_08r35x6yz1287dc3mg4xfc0000gn/T/pamPredict_u3sld6f4
+01-03 12:24 root         INFO     Retriving fastas- forward and reverse from a genbanke file
+01-03 12:24 root         ERROR    predictPAM terminated with errors. See the log file for details.
+01-03 12:24 root         ERROR    [Errno 21] Is a directory: '/'
