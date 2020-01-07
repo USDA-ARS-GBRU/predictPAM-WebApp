@@ -351,47 +351,54 @@ def main(args=None):
     """
     # Set up logging
     parser = myparser()
-    #if not args:
-    #   args = parser.parse_args()
+    if not args:
+        args = parser.parse_args()
+
     print('TEST')
-    print(args)
-    _logger_setup(args["log"])
+    print(args.strand)
+    print(type(args))
+
+    _logger_setup(args.log)
     try:
-        pamseq = Seq(args["pamseq"], IUPAC.unambiguous_dna)
+        pamseq = Seq(args.pamseq, IUPAC.unambiguous_dna)
         #parse genbank file: todo allow multiple Genbank files
         #record = SeqIO.parse(args.gbkfile, "genbank")
 
-        if args["tempdir"]:
-            if not os.path.exists(args["tempdir"]):
+        print('1')
+
+        if args.tempdir:
+            print('2')
+            if not os.path.exists(args.tempdir):
                 logging.warning("Specified location for tempfile ({}) does not exist, using default location.".format(tempdir))
                 tempdir = tempfile.mkdtemp(prefix='pamPredict_')
         else:
-            tempdir = tempfile.mkdtemp(prefix='pamPredict_', dir=args["tempdir"])
+            print('3')
+            tempdir = tempfile.mkdtemp(prefix='pamPredict_', dir=args.tempdir)
         logging.info("Temp directory is: %s", tempdir)
 
 
         # Try to avoid writing out and reading genome in fasta format
         logging.info("Retriving fastas- forward and reverse from a genbanke file")
-        get_fastas(args["gbkfile"], tempdir=tempdir)
+        get_fastas(args.gbkfile, tempdir=tempdir)
 
         # mapping
         logging.info("Mapping pam to the genome")
-        mapfile = map_pam(tempdir=tempdir, pamseq=args["pamseq"], threads=args["threads"], strand=args["strand"])
+        mapfile = map_pam(tempdir=tempdir, pamseq=args.pamseq, threads=args.threads, strand=args.strand)
         
 
         # Retrieving target sequence
         logging.info("Retrieving target sequence for matching PAM : %s", tempdir)
-        targetdict = get_target(tempdir=tempdir, mappingdata=mapfile, targetlength=args["targetlength"], strand=args["strand"])
+        targetdict = get_target(tempdir=tempdir, mappingdata=mapfile, targetlength=args.targetlength, strand=args.strand)
         
 
         # Parsing target sequence into two: 1)close12 and 2) remainingseq
         logging.info("Parsing target sequence into two: 1)proxitopam and 2) distaltopam")
-        parsetargetdict = parse_target(targetdict, strand=args["strand"], seqlengthtopam=args["lcp"])
+        parsetargetdict = parse_target(targetdict, strand=args.strand, seqlengthtopam=args.lcp)
         
 
         # Calculate Levenshtein distance among remainingseq, and remove any remainingseq that are similar
         logging.info("Filtering parse target sequence based on Levenshtein distance using NMSLIB index, with knn=1")
-        filterparsetargetdict = filter_parse_target(parsetargetdict, threads=args["threads"], levendistance=args["eds"])
+        filterparsetargetdict = filter_parse_target(parsetargetdict, threads=args.threads, levendistance=args.eds)
         
 
         # reformating filterparsetargetdict- to make compatible for pybed
@@ -403,7 +410,7 @@ def main(args=None):
 
         # get get_genbank_features from a genebank file
         logging.info("Retrieving CDS/gene information for each record in the genebank file")
-        genebankfeatures = get_genbank_features(args["gbkfile"])
+        genebankfeatures = get_genbank_features(args.gbkfile)
         # reformating genebankfeatures- to make compatible for pybed
         genebankfeatures_df = pd.DataFrame(genebankfeatures)
         # enpty tab crates isses in runnign pybed, so replance NaN with NA, then make tab separated
@@ -423,7 +430,7 @@ def main(args=None):
 
         # merge upstream and downstream output
         logging.info("Merging downstream and upstream features.Columns with suffix _x represents information from downstream whereas suffix with _y represent that of upstream")
-        merged_down_ups = merge_downstream_upstream(down,up,joined_columns,outputfilename=args["outfile"])
+        merged_down_ups = merge_downstream_upstream(down,up,joined_columns,outputfilename=args.outfile)
 
     except Exception as e:
         logging.error("predictPAM terminated with errors. See the log file for details.")

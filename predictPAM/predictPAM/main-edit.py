@@ -346,18 +346,16 @@ def merge_downstream_upstream(downsfile,upsfile,columns_name, outputfilename):
     all_df.to_csv(os.path.join(os.getcwd(),outputfilename),index=False,sep='\t',header=True)
     return all_df
 ################
-def main(args):
+def main(args=None):
     """Run Complete predictPAM workflow.
     """
     # Set up logging
-    # parser = myparser()
-    # if not args:
-    #     args = parser.parse_args()
-
-    # _logger_setup(args.log)
-    print("Test")
-    print(args["pamseq"])
-    print(args["tempdir"])
+    parser = myparser()
+    #if not args:
+    #   args = parser.parse_args()
+    print('TEST')
+    print(args)
+    _logger_setup(args["log"])
     try:
         pamseq = Seq(args["pamseq"], IUPAC.unambiguous_dna)
         #parse genbank file: todo allow multiple Genbank files
@@ -425,7 +423,7 @@ def main(args):
 
         # merge upstream and downstream output
         logging.info("Merging downstream and upstream features.Columns with suffix _x represents information from downstream whereas suffix with _y represent that of upstream")
-        merged_down_ups = merge_downstream_upstream(down,up,joined_columns,outputfilename="out.txt")
+        merged_down_ups = merge_downstream_upstream(down,up,joined_columns,outputfilename=args["outfile"])
 
     except Exception as e:
         logging.error("predictPAM terminated with errors. See the log file for details.")
