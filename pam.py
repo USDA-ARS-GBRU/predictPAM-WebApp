@@ -4,12 +4,14 @@ import requests
 from werkzeug import secure_filename
 import sys
 
-sys.path.insert(1, '/Users/anushkaswarup/Downloads/Storage/EPI/WebAppPAM/predictPAM/predictPAM/')
+# sys.path.insert(1, '/Users/anushkaswarup/Downloads/Storage/EPI/WebAppPAM/predictPAM/predictPAM/')
 
-from main import main
+# from main import main
+
+import predictPAM.main
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
-UPLOAD_FOLD = '/Users/anushkaswarup/Downloads/Storage/EPI/WebAppPAM/predictPAM/predictPAM/'
+UPLOAD_FOLD = '/Users/anushkaswarup/Downloads/Storage/EPI/WebAppPAM/'
 UPLOAD_FOLDER = os.path.join(APP_ROOT, UPLOAD_FOLD)
 
 class objectview(object):
@@ -37,7 +39,7 @@ def handle_form():
 
     lcp = int(request.form['lcp'])
     eds = int(request.form['eds'])
-    gbkfileloc = ['/Users/anushkaswarup/Downloads/Storage/EPI/WebAppPAM/predictPAM/test/test_data/Burkholderia_thailandensis_E264__ATCC_700388_133.gbk']
+    gbkfileloc = ['/Users/anushkaswarup/Downloads/Storage/EPI/WebAppPAM/Burkholderia_thailandensis_E264__ATCC_700388_133.gbk']
     out = request.form['Output']
 
     data = {"gbkfile":gbkfileloc, "pamseq":pamSeq, "targetlength":tarLength, 
@@ -46,7 +48,7 @@ def handle_form():
     data_obj = objectview(data)
 
     # predictPAM.main(data_obj)
-    main(data_obj)
+    predictPAM.main.main(data_obj)
 
     return render_template("submit.html")
    

@@ -1,6 +1,0 @@
-11-25 14:49 root         INFO     Temp directory is: /var/folders/52/rbrrfj5d369c35kd2xrktf3m0000gq/T/pamPredict_pr57ynlq
-11-25 14:49 root         INFO     Retriving fastas- forward and reverse from a genbanke file
-11-25 14:49 root         INFO     Mapping pam to the genome
-11-25 14:50 root         INFO     Retrieving target sequence for matching PAM : /var/folders/52/rbrrfj5d369c35kd2xrktf3m0000gq/T/pamPredict_pr57ynlq
-11-25 14:50 root         ERROR    predictPAM terminated with errors. See the log file for details.
-11-25 14:50 root         ERROR    Coordinates (Sequence.start=6264390 and Sequence.end=6264389) imply a different length than Sequence.seq (len=0). Did you modify Sequence.seq?
