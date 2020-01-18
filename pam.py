@@ -13,6 +13,7 @@ import predictPAM.main
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 UPLOAD_FOLD = '/Users/anushkaswarup/Downloads/Storage/EPI/WebAppPAM/'
 UPLOAD_FOLDER = os.path.join(APP_ROOT, UPLOAD_FOLD)
+ALLOWED_EXTENSIONS = {'gbk'}
 
 class objectview(object):
     def __init__(self, d):
@@ -22,10 +23,21 @@ app = Flask(__name__)
 
 @app.route('/handle_form', methods=['POST'])
 def handle_form():
-    print("Posted file: {}".format(request.files['file']))
-    file = request.files['file']
+    # print("Posted file: {}".format(request.files['file']))
+    # file = request.files('file[]')
+    # print(file.filename)
+    print("here")
+    # print(file)
+    # print(request.files.getlist('file[]'))
     #files = {'file': file.read()}
-    file.save(secure_filename(file.filename))
+    # file.save(secure_filename(file.filename))
+
+    files = request.files.getlist("file[]")
+    print(files)
+    for file in files:
+        file.save(secure_filename(file.filename))
+
+
     pamSeq = request.form['pamseq']
     tarLength = int(request.form['targetLength'])
     strand  = request.form['strand']
@@ -37,9 +49,17 @@ def handle_form():
     elif(strand=='2'):
         strand_str = 'reverse'
 
-    lcp = int(request.form['lcp'])
+    lcp = int(request.form['lcp']) 
     eds = int(request.form['eds'])
-    gbkfileloc = ['/Users/anushkaswarup/Downloads/Storage/EPI/WebAppPAM/Burkholderia_thailandensis_E264__ATCC_700388_133.gbk']
+
+    gbkfileloc = []
+
+    for file in files:
+        gbkfile = UPLOAD_FOLD+file.filename
+        gbkfileloc.append(gbkfile)
+
+    print(gbkfileloc)
+
     out = request.form['Output']
 
     data = {"gbkfile":gbkfileloc, "pamseq":pamSeq, "targetlength":tarLength, 

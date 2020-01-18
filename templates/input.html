@@ -2,18 +2,43 @@
 {% block content %}
 
 <head>
-    <h1>Upload Files</h1>   
-    <!-- <script defer src="validations.js"></script> -->
+    <h1>Upload Files</h1> 
+    <!-- <script src = "./js/validations.js"></script> -->
+    <script>
+        function ValidationEvent() {
+            // Storing Field Values In Variables
+            var pamseq = document.getElementById("pamseq").value;
+            var targetLength = document.getElementById("targetLength").value;
+            var lcp = document.getElementById("lcp").value;
+ 
+            if (pamseq.match(/(?![AaCcGgTtRrYySsWwKkMmBbDdHhVvNn])./g)!=null){
+                alert("Use IUPAC nucleotide code only!");
+                return false;
+            }   
+            else if(lcp > 0.6*targetLength){
+                alert("Lcp should not be greater than 60% of Target Length");
+                return false;
+                }
+
+            else {
+                console.log("passed")
+                return true;
+                }
+            }
+    </script>
+    
+    <!-- <link rel="stylesheet" type="application/javascrip[t" href="{{ url_for('static', filename='validations.js') }}"> -->
+
 </head>
 
     
 <body>
     <div id="error"></div>
-    <form action="handle_form" method="post" enctype="multipart/form-data" id="form">
+    <form action="handle_form" method="post" enctype="multipart/form-data" id="form" onsubmit="return ValidationEvent()">
     	<div class="form-control-label" style="font-size: 26px">PAM Sequence</div>
-         <input class="form-control form-control-lg" name="pamseq" type="text" required="true"><br>
+         <input class="form-control form-control-lg" name="pamseq" id="pamseq" type="text" required="true"><br>
          <div class="form-control-label" style="font-size: 26px">Target Length</div>
-         <input class="form-control form-control-lg" name="targetLength"  type="number" value="22" max="30" min="10"><br>
+         <input class="form-control form-control-lg" name="targetLength" id="targetLength" type="number" value="22" max="30" min="10"><br>
          <div class="form-control-label" style="font-size: 26px">Strand</div>
          <select class="form-control form-control-lg" name="strand" required="true">
 			  <option value="" selected="selected">None Selected</option>
@@ -22,7 +47,7 @@
 			</select><br>
         <!--  <input class="form-control form-control-lg" name="strand" type="text"><br> -->
      	<div class="form-control-label" style="font-size: 26px">LCP</div>
-         <input class="form-control form-control-lg" name="lcp" required="true" type="number" value="12"><br>
+         <input class="form-control form-control-lg" name="lcp" id="lcp" required="true" type="number" value="10"><br>
 
          <div class="form-control-label" style="font-size: 26px" type="number">EDS</div>
          	<select class="form-control form-control-lg" name="eds" required="true">
@@ -35,7 +60,7 @@
 			</select><br>
 
         <div class="form-control-label" style="font-size: 26px"> Upload gbk File</div>
-        <input class="input-group input-file" type="file" name="file" required="true">
+        <input class="input-group input-file" type="file" name="file[]" required="true" multiple>
         <br>
         <div class="form-control-label" style="font-size: 26px">Output File Name</div>
          <input class="form-control form-control-lg" name="Output" type="string" value="out.txt">

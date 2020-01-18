@@ -1,42 +1,55 @@
-01-09 13:22 root         INFO     Temp directory is: /var/folders/hg/7_08r35x6yz1287dc3mg4xfc0000gn/T/pamPredict_279qyxja
-01-09 13:22 root         INFO     Retriving fastas- forward and reverse from a genbanke file
-01-09 13:22 root         INFO     Mapping pam to the genome
-01-09 13:22 root         INFO     Retrieving target sequence for matching PAM : /var/folders/hg/7_08r35x6yz1287dc3mg4xfc0000gn/T/pamPredict_279qyxja
-01-09 13:22 root         INFO     Parsing target sequence into two: 1)proxitopam and 2) distaltopam
-01-09 13:22 root         INFO     Filtering parse target sequence based on Levenshtein distance using NMSLIB index, with knn=1
-01-09 13:22 nmslib       INFO     NN                  = 10
-01-09 13:22 nmslib       INFO     efConstruction_     = 10
-01-09 13:22 nmslib       INFO     indexThreadQty      = 4
-01-09 13:22 nmslib       INFO     useProxyDist        = 0
-01-09 13:22 nmslib       INFO     Set SmallWorldRand query-time parameters:
-01-09 13:22 nmslib       INFO     efSearch           =10
-01-09 13:22 nmslib       INFO     algoType           =0
-01-09 13:22 nmslib       INFO     Current nextNodeId: 0 futureNextNodeId + 1 after batch addition: 30598
-01-09 13:22 nmslib       INFO     4 indexing threads have finished
-01-09 13:22 nmslib       INFO     The number of data points: 30598 NextNodeId_ = 30598
-01-09 13:22 nmslib       DEBUG    Destroying Index
-01-09 13:22 root         INFO     Retrieving CDS/gene information for each record in the genebank file
-01-09 13:22 root         INFO     Mapping features downstream and upstream of target sequence
-01-09 13:22 root         INFO     Merging downstream and upstream features.Columns with suffix _x represents information from downstream whereas suffix with _y represent that of upstream
-01-09 13:22 werkzeug     INFO     127.0.0.1 - - [09/Jan/2020 13:22:51] "POST /handle_form HTTP/1.1" 200 -
-01-09 13:24 root         INFO     Temp directory is: /var/folders/hg/7_08r35x6yz1287dc3mg4xfc0000gn/T/pamPredict_por4qzy_
-01-09 13:24 root         INFO     Retriving fastas- forward and reverse from a genbanke file
-01-09 13:24 root         INFO     Mapping pam to the genome
-01-09 13:24 root         INFO     Retrieving target sequence for matching PAM : /var/folders/hg/7_08r35x6yz1287dc3mg4xfc0000gn/T/pamPredict_por4qzy_
-01-09 13:24 root         INFO     Parsing target sequence into two: 1)proxitopam and 2) distaltopam
-01-09 13:24 root         INFO     Filtering parse target sequence based on Levenshtein distance using NMSLIB index, with knn=1
-01-09 13:24 nmslib       INFO     NN                  = 10
-01-09 13:24 nmslib       INFO     efConstruction_     = 10
-01-09 13:24 nmslib       INFO     indexThreadQty      = 4
-01-09 13:24 nmslib       INFO     useProxyDist        = 0
-01-09 13:24 nmslib       INFO     Set SmallWorldRand query-time parameters:
-01-09 13:24 nmslib       INFO     efSearch           =10
-01-09 13:24 nmslib       INFO     algoType           =0
-01-09 13:24 nmslib       INFO     Current nextNodeId: 0 futureNextNodeId + 1 after batch addition: 30598
-01-09 13:24 nmslib       INFO     4 indexing threads have finished
-01-09 13:24 nmslib       INFO     The number of data points: 30598 NextNodeId_ = 30598
-01-09 13:24 nmslib       DEBUG    Destroying Index
-01-09 13:24 root         INFO     Retrieving CDS/gene information for each record in the genebank file
-01-09 13:24 root         INFO     Mapping features downstream and upstream of target sequence
-01-09 13:24 root         INFO     Merging downstream and upstream features.Columns with suffix _x represents information from downstream whereas suffix with _y represent that of upstream
-01-09 13:24 werkzeug     INFO     127.0.0.1 - - [09/Jan/2020 13:24:15] "POST /handle_form HTTP/1.1" 200 -
+01-17 18:40 root         INFO     Temp directory is: /var/folders/hg/7_08r35x6yz1287dc3mg4xfc0000gn/T/pamPredict_xvlpdbo3
+01-17 18:40 root         INFO     Retriving fastas- forward and reverse from a genbanke file
+01-17 18:40 root         INFO     Mapping pam to the genome
+01-17 18:40 root         INFO     Retrieving target sequence for matching PAM : /var/folders/hg/7_08r35x6yz1287dc3mg4xfc0000gn/T/pamPredict_xvlpdbo3
+01-17 18:40 root         INFO     Parsing target sequence into two: 1)proxitopam and 2) distaltopam
+01-17 18:40 root         INFO     Filtering parse target sequence based on Levenshtein distance using NMSLIB index, with knn=1
+01-17 18:40 nmslib       INFO     NN                  = 10
+01-17 18:40 nmslib       INFO     efConstruction_     = 10
+01-17 18:40 nmslib       INFO     indexThreadQty      = 4
+01-17 18:40 nmslib       INFO     useProxyDist        = 0
+01-17 18:40 nmslib       INFO     Set SmallWorldRand query-time parameters:
+01-17 18:40 nmslib       INFO     efSearch           =10
+01-17 18:40 nmslib       INFO     algoType           =0
+01-17 18:40 nmslib       INFO     Current nextNodeId: 0 futureNextNodeId + 1 after batch addition: 36037
+01-17 18:40 nmslib       INFO     4 indexing threads have finished
+01-17 18:40 nmslib       INFO     The number of data points: 36037 NextNodeId_ = 36037
+01-17 18:40 nmslib       DEBUG    Destroying Index
+01-17 18:40 root         INFO     Retrieving CDS/gene information for each record in the genebank file
+01-17 18:40 root         INFO     Mapping features downstream and upstream of target sequence
+01-17 18:40 root         INFO     Merging downstream and upstream features.Columns with suffix _x represents information from downstream whereas suffix with _y represent that of upstream
+01-17 18:40 werkzeug     INFO     127.0.0.1 - - [17/Jan/2020 18:40:40] "POST /handle_form HTTP/1.1" 200 -
+01-17 18:41 root         INFO     Temp directory is: /var/folders/hg/7_08r35x6yz1287dc3mg4xfc0000gn/T/pamPredict_0hbucop_
+01-17 18:41 root         INFO     Retriving fastas- forward and reverse from a genbanke file
+01-17 18:41 root         ERROR    predictPAM terminated with errors. See the log file for details.
+01-17 18:41 root         ERROR    'utf-8' codec can't decode byte 0xff in position 0: invalid start byte
+01-17 18:41 root         INFO     Temp directory is: /var/folders/hg/7_08r35x6yz1287dc3mg4xfc0000gn/T/pamPredict_0h8fn3d4
+01-17 18:41 root         INFO     Retriving fastas- forward and reverse from a genbanke file
+01-17 18:41 root         ERROR    predictPAM terminated with errors. See the log file for details.
+01-17 18:41 root         ERROR    'utf-8' codec can't decode byte 0xff in position 0: invalid start byte
+01-17 18:41 root         INFO     Temp directory is: /var/folders/hg/7_08r35x6yz1287dc3mg4xfc0000gn/T/pamPredict_4llx6pjj
+01-17 18:41 root         INFO     Retriving fastas- forward and reverse from a genbanke file
+01-17 18:41 root         ERROR    predictPAM terminated with errors. See the log file for details.
+01-17 18:41 root         ERROR    'utf-8' codec can't decode byte 0xff in position 0: invalid start byte
+01-17 18:42 root         INFO     Temp directory is: /var/folders/hg/7_08r35x6yz1287dc3mg4xfc0000gn/T/pamPredict_swuw23cd
+01-17 18:42 root         INFO     Retriving fastas- forward and reverse from a genbanke file
+01-17 18:42 root         INFO     Mapping pam to the genome
+01-17 18:42 root         INFO     Retrieving target sequence for matching PAM : /var/folders/hg/7_08r35x6yz1287dc3mg4xfc0000gn/T/pamPredict_swuw23cd
+01-17 18:42 root         INFO     Parsing target sequence into two: 1)proxitopam and 2) distaltopam
+01-17 18:42 root         INFO     Filtering parse target sequence based on Levenshtein distance using NMSLIB index, with knn=1
+01-17 18:42 nmslib       INFO     NN                  = 10
+01-17 18:42 nmslib       INFO     efConstruction_     = 10
+01-17 18:42 nmslib       INFO     indexThreadQty      = 4
+01-17 18:42 nmslib       INFO     useProxyDist        = 0
+01-17 18:42 nmslib       INFO     Set SmallWorldRand query-time parameters:
+01-17 18:42 nmslib       INFO     efSearch           =10
+01-17 18:42 nmslib       INFO     algoType           =0
+01-17 18:42 nmslib       INFO     Current nextNodeId: 0 futureNextNodeId + 1 after batch addition: 22238
+01-17 18:42 nmslib       INFO     4 indexing threads have finished
+01-17 18:42 nmslib       INFO     The number of data points: 22238 NextNodeId_ = 22238
+01-17 18:42 nmslib       DEBUG    Destroying Index
+01-17 18:42 root         INFO     Retrieving CDS/gene information for each record in the genebank file
+01-17 18:42 root         INFO     Mapping features downstream and upstream of target sequence
+01-17 18:42 root         INFO     Merging downstream and upstream features.Columns with suffix _x represents information from downstream whereas suffix with _y represent that of upstream
+01-17 18:42 werkzeug     INFO     127.0.0.1 - - [17/Jan/2020 18:42:23] "POST /handle_form HTTP/1.1" 200 -
+01-17 19:06 werkzeug     INFO      * Detected change in '/Users/anushkaswarup/Downloads/Storage/EPI/WebAppPAM/pam.py', reloading
