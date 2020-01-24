@@ -1,8 +1,9 @@
 import os
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 import requests
 from werkzeug import secure_filename
 import sys
+import pandas as pd
 
 # sys.path.insert(1, '/Users/anushkaswarup/Downloads/Storage/EPI/WebAppPAM/predictPAM/predictPAM/')
 
@@ -19,7 +20,8 @@ class objectview(object):
     def __init__(self, d):
         self.__dict__ = d
 
-app = Flask(__name__)
+app = Flask(__name__,
+           template_folder="templates")
 
 @app.route('/handle_form', methods=['POST'])
 def handle_form():
@@ -29,7 +31,7 @@ def handle_form():
     print("here")
     # print(file)
     # print(request.files.getlist('file[]'))
-    #files = {'file': file.read()}
+    # files = {'file': file.read()}
     # file.save(secure_filename(file.filename))
 
     files = request.files.getlist("file[]")
@@ -68,9 +70,20 @@ def handle_form():
     data_obj = objectview(data)
 
     # predictPAM.main(data_obj)
-    predictPAM.main.main(data_obj)
+    # predictPAM.main.main(data_obj)
 
-    return render_template("submit.html")
+    return render_template("submit.html");
+
+@app.route('/submit.html', methods=['POST'])
+def display_table():
+
+    df = pd.read_csv('out.txt', sep="\t", header=None)
+
+    a, b = df.shape
+
+    return jsonify(number_elements=a * b, my_table=df.to_html(classes='table table-striped" id = "output_table',
+                                       index=False, border=0))
+
    
 @app.route("/")
 def index():
