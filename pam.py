@@ -12,7 +12,7 @@ import pandas as pd
 import predictPAM.main
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
-UPLOAD_FOLD = '/Users/anushkaswarup/Downloads/Storage/EPI/WebAppPAM/'
+UPLOAD_FOLD = '/Users⁩/aswarup⁩/⁨Downloads⁩/⁨Storage⁩/⁨Github_repos⁩/⁨predictPAM-WebApp/⁩'
 UPLOAD_FOLDER = os.path.join(APP_ROOT, UPLOAD_FOLD)
 ALLOWED_EXTENSIONS = {'gbk'}
 
@@ -28,14 +28,12 @@ def handle_form():
     # print("Posted file: {}".format(request.files['file']))
     # file = request.files('file[]')
     # print(file.filename)
-    print("here")
     # print(file)
     # print(request.files.getlist('file[]'))
     # files = {'file': file.read()}
     # file.save(secure_filename(file.filename))
 
     files = request.files.getlist("file[]")
-    print(files)
     for file in files:
         file.save(secure_filename(file.filename))
 
@@ -60,8 +58,6 @@ def handle_form():
         gbkfile = UPLOAD_FOLD+file.filename
         gbkfileloc.append(gbkfile)
 
-    print(gbkfileloc)
-
     out = request.form['Output']
 
     data = {"gbkfile":gbkfileloc, "pamseq":pamSeq, "targetlength":tarLength, 
@@ -74,12 +70,14 @@ def handle_form():
 
     return render_template("submit.html");
 
-@app.route('/submit.html', methods=['POST'])
-def display_table():
-
+@app.route('/_get_table')
+def get_table():
+    print('here')
     df = pd.read_csv('out.txt', sep="\t", header=None)
 
     a, b = df.shape
+
+    print(a,b)
 
     return jsonify(number_elements=a * b, my_table=df.to_html(classes='table table-striped" id = "output_table',
                                        index=False, border=0))
