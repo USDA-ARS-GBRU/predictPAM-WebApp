@@ -65,20 +65,14 @@ def handle_form():
 
     data_obj = objectview(data)
 
-    # predictPAM.main(data_obj)
-    # predictPAM.main.main(data_obj)
+    predictPAM.main.main(data_obj)
 
     return render_template("submit.html");
 
 @app.route('/_get_table')
 def get_table():
-    print('here')
-    df = pd.read_csv('out.txt', sep="\t", header=None)
-
+    df = pd.read_csv('out.txt', sep="\t", header=0)
     a, b = df.shape
-
-    print(a,b)
-
     return jsonify(number_elements=a * b, my_table=df.to_html(classes='table table-striped" id = "output_table',
                                        index=False, border=0))
 
