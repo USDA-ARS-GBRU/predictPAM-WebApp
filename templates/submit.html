@@ -23,7 +23,7 @@
             $("#output_table").empty();
             }
             $("#mytablediv").html(data.my_table);
-            table = $("#output_table").DataTable();
+            table = $("#output_table").DataTable({ "deferRender": true });
             console.log(table)
             });
             return false;

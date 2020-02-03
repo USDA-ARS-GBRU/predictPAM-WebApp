@@ -1,22 +1,13 @@
-01-21 15:34 root         INFO     Temp directory is: /var/folders/hg/7_08r35x6yz1287dc3mg4xfc0000gn/T/pamPredict_1g_98x25
-01-21 15:34 root         INFO     Retriving fastas- forward and reverse from a genbanke file
-01-21 15:34 root         INFO     Mapping pam to the genome
-01-21 15:34 root         INFO     Retrieving target sequence for matching PAM : /var/folders/hg/7_08r35x6yz1287dc3mg4xfc0000gn/T/pamPredict_1g_98x25
-01-21 15:34 root         INFO     Parsing target sequence into two: 1)proxitopam and 2) distaltopam
-01-21 15:34 root         INFO     Filtering parse target sequence based on Levenshtein distance using NMSLIB index, with knn=1
-01-21 15:34 nmslib       INFO     NN                  = 10
-01-21 15:34 nmslib       INFO     efConstruction_     = 10
-01-21 15:34 nmslib       INFO     indexThreadQty      = 4
-01-21 15:34 nmslib       INFO     useProxyDist        = 0
-01-21 15:34 nmslib       INFO     Set SmallWorldRand query-time parameters:
-01-21 15:34 nmslib       INFO     efSearch           =10
-01-21 15:34 nmslib       INFO     algoType           =0
-01-21 15:34 nmslib       INFO     Current nextNodeId: 0 futureNextNodeId + 1 after batch addition: 36037
-01-21 15:34 nmslib       INFO     4 indexing threads have finished
-01-21 15:34 nmslib       INFO     The number of data points: 36037 NextNodeId_ = 36037
-01-21 15:34 nmslib       DEBUG    Destroying Index
-01-21 15:34 root         INFO     Retrieving CDS/gene information for each record in the genebank file
-01-21 15:34 root         INFO     Mapping features downstream and upstream of target sequence
-01-21 15:34 root         INFO     Merging downstream and upstream features.Columns with suffix _x represents information from downstream whereas suffix with _y represent that of upstream
-01-21 15:34 werkzeug     INFO     127.0.0.1 - - [21/Jan/2020 15:34:50] "POST /handle_form HTTP/1.1" 200 -
-01-21 15:35 werkzeug     INFO      * Detected change in '/Users/anushkaswarup/Downloads/Storage/EPI/WebAppPAM/pam.py', reloading
+01-28 16:05 root         INFO     Temp directory is: /var/folders/mm/k277yg753l96s68347_ynbwc0000gp/T/pamPredict_lujdkhqd
+01-28 16:05 root         INFO     Retriving fastas- forward and reverse from a genbanke file
+01-28 16:05 root         ERROR    predictPAM terminated with errors. See the log file for details.
+01-28 16:05 root         ERROR    [Errno 2] No such file or directory: '/Users\u2069/aswarup\u2069/\u2068Downloads\u2069/\u2068Storage\u2069/\u2068Github_repos\u2069/\u2068predictPAM-WebApp/\u2069Burkholderia_thailandensis_E264__ATCC_700388_133.gbk'
+01-28 16:05 root         INFO     Temp directory is: /var/folders/mm/k277yg753l96s68347_ynbwc0000gp/T/pamPredict_eldr_t_i
+01-28 16:05 root         INFO     Retriving fastas- forward and reverse from a genbanke file
+01-28 16:05 root         ERROR    predictPAM terminated with errors. See the log file for details.
+01-28 16:05 root         ERROR    [Errno 2] No such file or directory: '/Users\u2069/aswarup\u2069/\u2068Downloads\u2069/\u2068Storage\u2069/\u2068Github_repos\u2069/\u2068predictPAM-WebApp/\u2069Burkholderia_thailandensis_E264__ATCC_700388_133.gbk'
+01-28 16:05 root         INFO     Temp directory is: /var/folders/mm/k277yg753l96s68347_ynbwc0000gp/T/pamPredict_rs5agj3l
+01-28 16:05 root         INFO     Retriving fastas- forward and reverse from a genbanke file
+01-28 16:05 root         ERROR    predictPAM terminated with errors. See the log file for details.
+01-28 16:05 root         ERROR    [Errno 2] No such file or directory: '/Users\u2069/aswarup\u2069/\u2068Downloads\u2069/\u2068Storage\u2069/\u2068Github_repos\u2069/\u2068predictPAM-WebApp/\u2069Burkholderia_thailandensis_E264__ATCC_700388_133.gbk'
+01-28 16:08 werkzeug     INFO      * Detected change in '/Users/aswarup/Downloads/Storage/Github_repos/predictPAM-WebApp/pam.py', reloading

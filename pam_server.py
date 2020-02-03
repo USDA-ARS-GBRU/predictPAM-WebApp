@@ -1,4 +1,3 @@
-import os
 from flask import Flask, request, render_template, jsonify
 import requests
 from werkzeug import secure_filename
@@ -7,15 +6,10 @@ import pandas as pd
 import numpy as np
 from app.mod_tables.serverside.serverside_table import ServerSideTable
 from app.mod_tables.serverside import table_schemas
-
-
-# sys.path.insert(1, '/Users/anushkaswarup/Downloads/Storage/EPI/WebAppPAM/predictPAM/predictPAM/')
-
-# from main import main
-
 import predictPAM.main
-from app.mod_tables.serverside.serverside_table import ServerSideTable
-from app.mod_tables.serverside import table_schemas
+from flask import Blueprint, jsonify, request
+from app import table_builder
+
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 UPLOAD_FOLD = '/Users⁩/aswarup⁩/⁨Downloads⁩/⁨Storage⁩/⁨Github_repos⁩/⁨predictPAM-WebApp/⁩'
@@ -26,17 +20,15 @@ class objectview(object):
     def __init__(self, d):
         self.__dict__ = d
 
-class TableBuilder(object):
-
-    def collect_data_clientside(self):
-        return {'data': DATA_SAMPLE}
-
-    def collect_data_serverside(self, request):
+def collect_data_serverside(self, request):
         columns = table_schemas.SERVERSIDE_TABLE_COLUMNS
-        return ServerSideTable(request, DATA_SAMPLE, columns).output_result()
+        return ServerSideTable(request, data_dict, columns).output_result()
+
 
 app = Flask(__name__,
            template_folder="templates")
+
+tables = Blueprint('tables', __name__, url_prefix='/tables')
 
 @app.route('/handle_form', methods=['POST'])
 def handle_form():
@@ -89,23 +81,17 @@ def handle_form():
 
     return render_template("serverside_table.html");
 
-@app.route('/serverside_table')
-def get_table(self,request):
-    df = pd.read_csv('out.txt', sep="\t", header=0)
-    a, b = df.shape
 
+@tables.route("/serverside", methods=['GET'])
+def serverside_table_content():
+
+    df = pd.read_csv('out.txt', sep="\t", header=0)
+    print('here')
     data_dict = df.to_dict()
 
     columns = table_schemas.SERVERSIDE_TABLE_COLUMNS
-    return ServerSideTable(request, data_dict, columns).output_result()
-    # return jsonify(number_elements=a * b, my_table=df.to_html(classes='table table-striped" id = "output_table',
-    #                                    index=False, border=0))
+    data = ServerSideTable(request, data_dict, columns).output_result()
+    return jsonify(data)
 
-   
-@app.route("/")
-def index():
-    return render_template("input.html");   
-
-
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8080, debug=True)
+if __name__ == '__main__':
+    app.run(debug=True)
