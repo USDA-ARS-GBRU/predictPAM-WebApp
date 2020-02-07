@@ -1,5 +1,6 @@
 $(document).ready(function () {
   $('#table_id').DataTable({
+    scrollX: true,
     bProcessing: true,
     bServerSide: true,
     sPaginationType: "full_numbers",

@@ -3,6 +3,7 @@
 
 <head>
     <!-- <script src = "./js/validations.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
         function ValidationEvent() {
             // Storing Field Values In Variables
@@ -33,59 +34,77 @@
     
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" href="#">PredictPAM</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#home">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#form">Form</a>
+    </li>
+  </ul>
 
-  <div class="collapse navbar-collapse" id="navbarColor01">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="input.html">Form</a>
-      </li>
-    </ul>
-    
+  <div id="myTabContent" class="tab-content">
+    <div class="tab-pane fade show active" id="home">
+      <div class="jumbotron vertical-center">
+    <h1 class="display-3">About The Project</h1>
+    <hr class="my-4">
+    <p>Retrieving target sequence for a given PAM motif in the forward strand, where length of target sequence is 25 base pair. 12 base pair close to PAM motif is conserved ,i.e. unique. Remaining sequence at the distal end to PAM motif has leven distance of more than 2. Here the number of used threads is 2, and we want to keep the temporary directory. Return a table of pam sites and associated data, at the current folder.</p>
   </div>
-</nav>
-
+    </div>
+  <div class="tab-pane fade" id="form">
+  <div class="row">
+  <div class="col-md-8">
+  <div class="jumbotron vertical-center">
     <div id="error"></div>
     <form action="handle_form" method="post" enctype="multipart/form-data" id="form" onsubmit="return ValidationEvent()">
-    	<div class="form-control-label" style="font-size: 26px">PAM Sequence</div>
-         <input class="form-control form-control-lg" name="pamseq" id="pamseq" type="text" required="true"><br>
-         <div class="form-control-label" style="font-size: 26px">Target Length</div>
-         <input class="form-control form-control-lg" name="targetLength" id="targetLength" type="number" value="22" max="30" min="10"><br>
-         <div class="form-control-label" style="font-size: 26px">Strand</div>
-         <select class="form-control form-control-lg" name="strand" required="true">
-			  <option value="" selected="selected">None Selected</option>
-			  <option value="1">Forward</option>
-			  <option value="2">Reverse</option>
-			</select><br>
+      <div class="form-control-label" style="font-size: 26px">PAM Sequence</div>
+      <small id="fileHelp" class="form-text text-muted">A short PAM motif to search for, may be use IUPAC ambiguous alphabet. Required.</small>
+      <input class="form-control form-control-lg" name="pamseq" id="pamseq" type="text" required="true"><br>
+      
+      <div class="form-control-label" style="font-size: 26px">Target Length</div>
+      <small id="fileHelp" class="form-text text-muted">Length of the target sequence. Default is 2</small>
+      <input class="form-control form-control-lg" name="targetLength" id="targetLength" type="number" value="22" max="30" min="10"><br>
+         
+      <div class="form-control-label" style="font-size: 26px">Strand</div>
+      <small id="fileHelp" class="form-text text-muted">Strand of DNA to search for PAM motif. Default is forward. Options: {forward, reverse}.</small>
+        <select class="form-control form-control-lg" name="strand" required="true">
+        <option value="" selected="selected">None Selected</option>
+        <option value="1">Forward</option>
+        <option value="2">Reverse</option>
+        </select><br>
         <!--  <input class="form-control form-control-lg" name="strand" type="text"><br> -->
-     	<div class="form-control-label" style="font-size: 26px">LCP</div>
-         <input class="form-control form-control-lg" name="lcp" id="lcp" required="true" type="number" value="10"><br>
+      <div class="form-control-label" style="font-size: 26px">LCP</div>
+      <small id="fileHelp" class="form-text text-muted">Length of conserved sequence close to PAM motif. Default is 12.</small>
+      <input class="form-control form-control-lg" name="lcp" id="lcp" required="true" type="number" value="10"><br>
 
-         <div class="form-control-label" style="font-size: 26px" type="number">EDS</div>
-         	<select class="form-control form-control-lg" name="eds" required="true">
-			  <option>0</option>
-			  <option>1</option>
-			  <option selected="selected">2</option>
-			  <option>3</option>
-			  <option>4</option>
-			  <option>5</option>
-			</select><br>
+      <div class="form-control-label" style="font-size: 26px" type="number">EDS</div>
+      <small id="fileHelp" class="form-text text-muted">UnexceptedLevenshtein edit distance on the distal portion of target sequence from PAM motif. Options: {0, 1, 2, 3, 4, 5}. Default is 2.</small>
+        <select class="form-control form-control-lg" name="eds" required="true">
+        <option>0</option>
+        <option>1</option>
+        <option selected="selected">2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        </select><br>
 
-        <div class="form-control-label" style="font-size: 26px"> Upload gbk File</div>
-        <input class="input-group input-file" type="file" name="file[]" required="true" multiple>
-        <br>
-        <div class="form-control-label" style="font-size: 26px">Output File Name</div>
-         <input class="form-control form-control-lg" name="Output" type="string" value="out.txt">
+      <div class="form-control-label" style="font-size: 26px"> Upload gbk File</div>
+      <small id="fileHelp" class="form-text text-muted">A .GBk, .GB file or files. Supports single or multiple genome files with single or multiple chromosomes. Required.</small>
+      <input class="input-group input-file" type="file" name="file[]" required="true" multiple>
+      
+      <br>
+      <div class="form-control-label" style="font-size: 26px">Output File Name</div>
+      <small id="fileHelp" class="form-text text-muted">The table of pam sites and data. Required.</small>
+      <input class="form-control form-control-lg" name="Output" type="string" value="out.txt">
 
-        <input class="btn btn-outline-primary" style="margin-top: 20px" type="submit" value="Submit">
+      <input class="btn btn-outline-primary" style="margin-top: 20px" type="submit" value="Submit">
     </form>
+  </div>
+  </div>
+  </div>
+  </div>
+</div>
+  
 </body>
 
 {% endblock %}
