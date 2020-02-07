@@ -2,7 +2,6 @@
 {% block body %}
 
 <head>
-    <h1>Upload Files</h1> 
     <!-- <script src = "./js/validations.js"></script> -->
     <script>
         function ValidationEvent() {
@@ -33,6 +32,26 @@
 
     
 <body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="#">PredictPAM</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="input.html">Form</a>
+      </li>
+    </ul>
+    
+  </div>
+</nav>
+
     <div id="error"></div>
     <form action="handle_form" method="post" enctype="multipart/form-data" id="form" onsubmit="return ValidationEvent()">
     	<div class="form-control-label" style="font-size: 26px">PAM Sequence</div>
@@ -65,7 +84,7 @@
         <div class="form-control-label" style="font-size: 26px">Output File Name</div>
          <input class="form-control form-control-lg" name="Output" type="string" value="out.txt">
 
-        <input class="btn btn-outline-info" style="margin-top: 20px" type="submit" value="Submit">
+        <input class="btn btn-outline-primary" style="margin-top: 20px" type="submit" value="Submit">
     </form>
 </body>
 
