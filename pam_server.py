@@ -17,7 +17,7 @@ from app import table_builder
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 UPLOAD_FOLD = '/Users⁩/aswarup⁩/⁨Downloads⁩/⁨Storage⁩/⁨Github_repos⁩/⁨predictPAM-WebApp/⁩'
 UPLOAD_FOLDER = os.path.join(APP_ROOT, UPLOAD_FOLD)
-ALLOWED_EXTENSIONS = {'gbk'}
+ALLOWED_EXTENSIONS = {'gbk','gb'}
 
 class objectview(object):
     def __init__(self, d):
@@ -35,13 +35,6 @@ app = Flask(__name__,
 
 @app.route('/handle_form', methods=['POST'])
 def handle_form():
-    # print("Posted file: {}".format(request.files['file']))
-    # file = request.files('file[]')
-    # print(file.filename)
-    # print(file)
-    # print(request.files.getlist('file[]'))
-    # files = {'file': file.read()}
-    # file.save(secure_filename(file.filename))
 
     files = request.files.getlist("file[]")
     for file in files:

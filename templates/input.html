@@ -49,11 +49,10 @@
             <a class="nav-link" href="https://www.usda.gov/">USDA.GOV</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">CONTACT US</a>
+            <a class="nav-link" href="https://tinyecology.com/people/">CONTACT US</a>
           </li>
         </ul>
       </div>
-    </div>
   </nav>
 
   <ul class="nav nav-tabs">
@@ -67,16 +66,15 @@
 
   <div id="myTabContent" class="tab-content">
     <div class="tab-pane fade show active" id="home">
-      <div class="jumbotron vertical-center">
+    <div class="jumbotron">
     <h1 class="display-3">About The Project</h1>
     <hr class="my-4">
     <small id="fileHelp" class="form-text text-muted">Retrieving target sequence for a given PAM motif in the forward strand, where length of target sequence is 25 base pair. 12 base pair close to PAM motif is conserved ,i.e. unique. Remaining sequence at the distal end to PAM motif has leven distance of more than 2. Here the number of used threads is 2, and we want to keep the temporary directory. Return a table of pam sites and associated data, at the current folder.</small>
   </div>
     </div>
   <div class="tab-pane fade" id="form">
-  <div class="row">
-  <div class="col-md-8">
-  <div class="jumbotron vertical-center">
+    <div class="container">
+  <div class="jumbotron">
     <div id="error"></div>
     <form action="handle_form" method="post" enctype="multipart/form-data" id="form" onsubmit="return ValidationEvent()">
       <div class="form-control-label" style="font-size: 26px">PAM Sequence</div>
@@ -121,7 +119,6 @@
 
       <input class="btn btn-outline-primary" style="margin-top: 20px" type="submit" value="Submit">
     </form>
-  </div>
   </div>
   </div>
   </div>

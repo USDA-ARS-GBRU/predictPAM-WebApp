@@ -1,5 +1,7 @@
 $(document).ready(function () {
   $('#table_id').DataTable({
+    dom: 'Bfrtip',
+    buttons : ['csv'],
     scrollX: true,
     bProcessing: true,
     bServerSide: true,
