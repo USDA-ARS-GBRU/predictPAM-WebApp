@@ -12,10 +12,8 @@ from flask import Blueprint, jsonify, request
 from app import table_builder
 # import uuid 
 
-
-
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
-UPLOAD_FOLD = '/Users⁩/aswarup⁩/⁨Downloads⁩/⁨Storage⁩/⁨Github_repos⁩/⁨predictPAM-WebApp/⁩'
+UPLOAD_FOLD = '/Users/anushkaswarup/Downloads/Storage/EPI/WebAppPAM/'
 UPLOAD_FOLDER = os.path.join(APP_ROOT, UPLOAD_FOLD)
 ALLOWED_EXTENSIONS = {'gbk','gb'}
 
@@ -74,7 +72,7 @@ def handle_form():
 
     data_obj = objectview(data)
 
-    # predictPAM.main.main(data_obj)
+    predictPAM.main.main(data_obj)
 
     return render_template("serverside_table.html");
 
