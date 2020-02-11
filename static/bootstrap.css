@@ -4647,6 +4647,19 @@ input[type="button"].btn-block {
   white-space: nowrap;
 }
 
+.navbar .navbar-brand img {
+  height: 50px;
+}
+
+.navbar-brand span {
+  font-size:80%;
+  line-height:1.2;
+  font-weight: 500;
+  display:inline-block;
+  vertical-align:middle;
+  padding:0 0 0 15px;
+}
+
 .navbar-brand:hover, .navbar-brand:focus {
   text-decoration: none;
 }
