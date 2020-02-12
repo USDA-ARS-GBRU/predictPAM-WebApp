@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, request,make_response, render_template, jsonify
 import requests
 import os
 from werkzeug import secure_filename
@@ -13,7 +13,7 @@ from app import table_builder
 # import uuid 
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
-UPLOAD_FOLD = '/Users/anushkaswarup/Downloads/Storage/EPI/WebAppPAM/'
+UPLOAD_FOLD = '/Users⁩/aswarup⁩/Downloads⁩/Storage/⁨Github_repos⁩/predictPAM-WebApp⁩/'
 UPLOAD_FOLDER = os.path.join(APP_ROOT, UPLOAD_FOLD)
 ALLOWED_EXTENSIONS = {'gbk','gb'}
 
@@ -57,13 +57,12 @@ def handle_form():
     # gbkfileloc = np.asarray(gbkfileloc)
 
     for file in files:
-        print(gbkfileloc)
         gbkfile = UPLOAD_FOLD+file.filename
         gbkfileloc.append(gbkfile)
-        print(gbkfileloc)
 
+    gbkfileloc = ["/Users⁩/aswarup⁩/Downloads⁩/Storage/⁨Github_repos⁩/predictPAM-WebApp⁩/Burkholderia_thailandensis_E264__ATCC_700388_133.gbk"]
     print(gbkfileloc)
-
+    
     out = request.form['Output'] 
     # + <random_text>
 
@@ -82,7 +81,6 @@ def serverside_table_content():
     #read query paramas
     # read the random text, and data from output_<random_text>.txt
     df = pd.read_csv('out.txt', sep="\t", header=0)
-    print('here')
 
     data_dict = df.fillna(0).to_dict('records')
     a = [{
@@ -128,16 +126,18 @@ def serverside_table_content():
       "type_y": "gene"
     }]
 
-    # data_clean = []
-
-    # for i in range(0,df.shape[0]):
-    #     columns = df.SERVERSIDE_TABLE_COLUMNS
-
-
     columns = table_schemas.SERVERSIDE_TABLE_COLUMNS
-    print(columns)
     data = ServerSideTable(request, data_dict, columns).output_result()
     return jsonify(data)
+
+@app.route("/exportcsv", methods=['GET', 'POST'])
+def exportcsv():
+  df = pd.read_csv('out.txt', sep="\t", header=0)
+  print('here')
+  resp = make_response(df.to_csv())
+  resp.headers["Content-Disposition"] = "attachment; filename=export.csv"
+  resp.headers["Content-Type"] = "text/csv"
+  return resp
 
 @app.route("/")
 def index():

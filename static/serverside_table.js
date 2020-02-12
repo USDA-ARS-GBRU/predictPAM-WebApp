@@ -1,12 +1,11 @@
 $(document).ready(function () {
   $('#table_id').DataTable({
-    dom: 'Bfrtip',
-    buttons : ['csv'],
     scrollX: true,
     bProcessing: true,
     bServerSide: true,
     sPaginationType: "full_numbers",
-    lengthMenu: [[10, 25, 50, 100], [10, 25, 50, 100]],
+    lengthMenu: [[ 10, 25, 50, -1 ],
+[ '10 rows', '25 rows', '50 rows', 'Show all' ]],
     bjQueryUI: true,
     sAjaxSource: '/serverside?a=b',
     columns: [

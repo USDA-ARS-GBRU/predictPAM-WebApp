@@ -26,6 +26,7 @@
                 }
             }
     </script>
+
     
     <!-- <link rel="stylesheet" type="application/javascrip[t" href="{{ url_for('static', filename='validations.js') }}"> -->
 
@@ -60,7 +61,7 @@
       <a class="nav-link active" data-toggle="tab" href="#home">Home</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#form">Form</a>
+      <a class="nav-link" data-toggle="tab" href="#form">GuideMaker</a>
     </li>
   </ul>
 
@@ -69,7 +70,7 @@
     <div class="jumbotron">
     <h1 class="display-3">About The Project</h1>
     <hr class="my-4">
-    <small id="fileHelp" class="form-text text-muted">Retrieving target sequence for a given PAM motif in the forward strand, where length of target sequence is 25 base pair. 12 base pair close to PAM motif is conserved ,i.e. unique. Remaining sequence at the distal end to PAM motif has leven distance of more than 2. Here the number of used threads is 2, and we want to keep the temporary directory. Return a table of pam sites and associated data, at the current folder.</small>
+    <p id="fileHelp" class="form-text text-muted">Retrieving target sequence for a given PAM motif in the forward strand, where length of target sequence is 25 base pair. 12 base pair close to PAM motif is conserved ,i.e. unique. Remaining sequence at the distal end to PAM motif has leven distance of more than 2. Here the number of used threads is 2, and we want to keep the temporary directory. Return a table of pam sites and associated data, at the current folder.</p>
   </div>
     </div>
   <div class="tab-pane fade" id="form">
@@ -117,7 +118,7 @@
       <small id="fileHelp" class="form-text text-muted">The table of pam sites and data. Required.</small>
       <input class="form-control form-control-lg" name="Output" type="string" value="out.txt">
 
-      <input class="btn btn-outline-primary" style="margin-top: 20px" type="submit" value="Submit">
+      <input class="btn btn-outline-primary" style="margin-top: 20px" type="submit" value="Submit" onclick="$('#loading').show();">
     </form>
   </div>
   </div>
@@ -125,5 +126,6 @@
 </div>
   
 </body>
+<div id="loading" style="display:none;"><img src="loading.gif" alt="" />Loading!</div>
 
 {% endblock %}
