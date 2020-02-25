@@ -1,24 +1,87 @@
-{% extends "template.html" %}
-{% block title %}
+{% extends "layout.html" %}
 
-<title>Serverside Table</title>
-
-{% endblock %}
 {% block body %}
 
-<script type="text/javascript" src="/static/js/serverside_table.js"></script>
 
-<div class="table_container">
-  <table id="serverside_table" cellspacing="0">
+<nav class="navbar navbar-expand-lg navbar-light bg-light static-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+            <img class="img-responsive" src="/static/img/usda-symbol-color.png" alt="">
+            <span>PredictPAM<br>U.S. DEPARTMENT OF AGRICULTURE</span></div>
+          </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li>
+            <a class="nav-link" href="https://www.usda.gov/">USDA.GOV</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://tinyecology.com/people/">CONTACT US</a>
+          </li>
+        </ul>
+      </div>
+  </nav>
+
+<h1 class="text-center">Candidate Guide RNAs</h1> 
+
+<script type="text/javascript" src="/static/serverside_table.js"></script>
+
+<div>
+  <table id="table_id" class="table table-hover">
     <thead>
       <tr>
-        <th>Column A</th>
-        <th>Column B</th>
-        <th>Column C</th>
-        <th>Column D</th>
+        <th>seqid</th>
+        <th>target_sp</th>
+        <th>target_ep</th>
+        <th>pam_seq</th>
+        <th>strand</th>
+        <th>target</th>
+        <th>distaltopam</th>
+        <th>proxitopam</th>
+        <th>accession_x</th>
+        <th>start_x</th>
+        <th>stop_x</th>
+        <th>type_x</th>
+        <th>strand_for_feature_x</th>
+        <th>locus_tag_x</th>
+        <th>db_xref_x</th>
+        <th>protein_id_x</th>
+        <th>translation_x</th>
+        <th>product_x</th>
+        <th>product_name_confidence_x</th>
+        <th>name_x</th>
+        <th>product_synonym_x</th>
+        <th>note_x</th>
+        <th>gene_synonym_x</th>
+        <th>distance_x</th>
+        <th>accession_y</th>
+        <th>start_y</th>
+        <th>stop_y</th>
+        <th>type_y</th>
+        <th>strand_for_feature_y</th>
+        <th>locus_tag_y</th>
+        <th>db_xref_y</th>
+        <th>protein_id_y</th>
+        <th>translation_y</th>
+        <th>product_y</th>
+        <th>product_name_confidence_y</th>
+        <th>name_y</th>
+        <th>product_synonym_y</th>
+        <th>note_y</th>
+        <th>gene_synonym_y</th>
+        <th>distance_y</th>
       </tr>
     </thead>
   </table>
 </div>
+
+<form action="/exportcsv" method="get">
+  <div class="text-center">
+    <button class="btn btn-success" style="margin-top: 20px" type="submit" value="exportCSV">Export File</button>
+    </div>
+</form>
+
 
 {% endblock %}
