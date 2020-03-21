@@ -1,45 +1,36 @@
 FROM alpine as builder
 RUN apk add --no-cache openssh-client git
 
-COPY github_key .
+ADD github_key /
 
 RUN eval $(ssh-agent) && \
     ssh-add github_key && \
     ssh-keyscan -H github.com >> /etc/ssh/ssh_known_hosts && \
     git clone git@github.com:USDA-ARS-GBRU/predictPAM.git /opt/predictPAM
 
-WORKDIR /opt/predictPAM
 
-
-
-FROM ubuntu:16.04
-
-MAINTAINER Anushka Swarup "aswarup@ufl.edu"
-
-RUN apt-get update && apt-get install -y \
-	python-pip python-dev \
-	build-essential libssl-dev libffi-dev\
-    libxml2-dev libxslt1-dev zlib1g-dev \
-    && pip install --upgrade pip
+FROM continuumio/miniconda3
 
 COPY . /app
+WORKDIR /app
 
-WORKDIR ./app
+# Create the environment:
+RUN ls
+RUN conda config --set restore_free_channel true
+RUN conda env create -f app/env.yml python=3.7.3
 
-RUN pip install pip==9.0.3 pybind11
+RUN conda install -c anaconda libgfortran
+RUN conda install -c anaconda appnope
 
-RUN pip install -r ./app/requirements.txt
+# Make RUN commands use the new environment:
+SHELL ["conda", "run", "-n", "myenv", "/bin/bash", "-c"]
+
+RUN pip3 install pip==9.0.3 pybind11
+RUN pip3 install -r ./app/requirements.txt
 
 COPY --from=builder /opt/predictPAM/ .
-EXPOSE 80
+RUN  python3 ./setup.py install
 
-ENTRYPOINT [ "python" ]
+EXPOSE 5000
 
-CMD [ "./app/app.py" ]
-
-
-
-
-
-
-
+ENTRYPOINT [ "conda", "run", "-n", "myenv", "python", "./app/app.py" ]

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask import Flask, request,make_response, render_template, jsonify, session
 import requests
 import os
@@ -13,6 +14,8 @@ from flask import Blueprint, jsonify, request
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 UPLOAD_FOLD = '/Users/anushkaswarup/Downloads/Storage/EPI/WebAppPAM/app/'
+UPLOAD_FOLD = os.getcwd()+"/"
+
 UPLOAD_FOLDER = os.path.join(APP_ROOT, UPLOAD_FOLD)
 ALLOWED_EXTENSIONS = {'gbk','gb'}
 
@@ -29,14 +32,15 @@ app = Flask(__name__,
            template_folder="templates")
 app.secret_key = 'go gators'
 
-#tables = Blueprint('tables', __name__, url_prefix='')
-
 @app.route('/handle_form', methods=['POST'])
 def handle_form():
+
+    print('on submit')
 
     files = request.files.getlist("file[]")
     for file in files:
         file.save(secure_filename(file.filename))
+        print("Hi "+os.getcwd())
 
 
     pamSeq = request.form['pamseq']
@@ -60,7 +64,9 @@ def handle_form():
 
     out = request.form['Output']
 
-    data = {"gbkfile":gbkfileloc, "pamseq":pamSeq, "targetlength":tarLength, 
+    print("gbkfileloc: "+gbkfileloc[0])
+
+    data = {"gbkfile":gbkfileloc, "pamseq":pamSeq, "targetlength":tarLength,
     "strand":strand_str, "lcp":lcp,"eds":eds, "outfile":out, "tempdir":None, "threads":1, "log":"predictpam.log"}
 
     data_obj = objectview(data)
@@ -89,7 +95,6 @@ def serverside_table_content():
 def exportcsv():
   out = session.get('output_file', None)
   df = pd.read_csv(out, sep="\t", header=0)
-  print('here')
   resp = make_response(df.to_csv())
   resp.headers["Content-Disposition"] = ("attachment; filename=%s" % out)
   resp.headers["Content-Type"] = "text/csv"
@@ -100,4 +105,4 @@ def index():
     return render_template("input.html");   
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', debug=True)
