@@ -15,22 +15,22 @@ COPY . /app
 WORKDIR /app
 
 # Create the environment:
-RUN ls
-RUN conda config --set restore_free_channel true
-RUN conda env create -f app/env.yml python=3.7.3
+RUN conda env create -f app/environment.yml
 
-RUN conda install -c anaconda libgfortran
-RUN conda install -c anaconda appnope
+SHELL ["conda", "run", "-n", "predictenv", "/bin/bash", "-c"]
 
-# Make RUN commands use the new environment:
-SHELL ["conda", "run", "-n", "myenv", "/bin/bash", "-c"]
+RUN conda install -c bioconda pysam
+RUN conda install flask
+RUN	conda install requests
+RUN	conda install -c anaconda libgfortran
+RUN conda install -c anaconda psutil
+RUN pip install pip==9.0.3 pybind11
+RUN	pip install nmslib
 
-RUN pip3 install pip==9.0.3 pybind11
-RUN pip3 install -r ./app/requirements.txt
-
+RUN pip install -U Werkzeug
 COPY --from=builder /opt/predictPAM/ .
 RUN  python3 ./setup.py install
 
 EXPOSE 5000
 
-ENTRYPOINT [ "conda", "run", "-n", "myenv", "python", "./app/app.py" ]
+ENTRYPOINT [ "conda", "run", "-n", "predictenv", "python", "./app/app.py" ]

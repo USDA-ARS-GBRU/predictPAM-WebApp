@@ -2,7 +2,7 @@
 from flask import Flask, request,make_response, render_template, jsonify, session
 import requests
 import os
-from werkzeug import secure_filename
+from werkzeug.utils import secure_filename
 import sys
 import pandas as pd
 import numpy as np
