@@ -28,11 +28,11 @@ def collect_data_serverside(self, request):
         return ServerSideTable(request, data_dict, columns).output_result()
 
 
-app = Flask(__name__,
+application = Flask(__name__,
            template_folder="templates")
-app.secret_key = 'go gators'
+application.secret_key = 'go gators'
 
-@app.route('/handle_form', methods=['POST'])
+@application.route('/handle_form', methods=['POST'])
 def handle_form():
 
     print('on submit')
@@ -78,7 +78,7 @@ def handle_form():
     return render_template("serverside_table.html");
 
 
-@app.route("/serverside", methods=['GET'])
+@application.route("/serverside", methods=['GET'])
 def serverside_table_content():
     #read query paramas
     # read the random text, and data from output_<random_text>.txt
@@ -91,7 +91,7 @@ def serverside_table_content():
     data = ServerSideTable(request, data_dict, columns).output_result()
     return jsonify(data)
 
-@app.route("/exportcsv", methods=['GET', 'POST'])
+@application.route("/exportcsv", methods=['GET', 'POST'])
 def exportcsv():
   out = session.get('output_file', None)
   df = pd.read_csv(out, sep="\t", header=0)
@@ -100,9 +100,9 @@ def exportcsv():
   resp.headers["Content-Type"] = "text/csv"
   return resp
 
-@app.route("/")
+@application.route("/")
 def index():
     return render_template("input.html");   
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+    application.run(host='0.0.0.0', debug=True)
