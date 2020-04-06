@@ -1,0 +1,21 @@
+name: predictenv
+channels:
+  - akode
+  - anaconda
+  - bioconda/label/cf201901
+  - conda-forge
+  - bioconda
+  - defaults
+  - ursky
+dependencies:
+  - numpy=1.17.3
+  - openssl=1.1.1
+  - pandas=0.25.3
+  - pip=19.3.1=py36_0
+  - tk=8.6.10
+  - wheel=0.33.6=py36_0
+  - xz=5.2.4
+  - zlib=1.2.11
+  - gunicorn
+  - flask
+prefix: /Users/poudel/miniconda3/envs/predictenv
