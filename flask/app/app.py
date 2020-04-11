@@ -10,7 +10,6 @@ from serverside.serverside_table import ServerSideTable
 from serverside import table_schemas
 import predictPAM.main
 from flask import Blueprint, jsonify, request
-# import uuid 
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 UPLOAD_FOLD = '/Users/anushkaswarup/Downloads/Storage/EPI/WebAppPAM/app/'
@@ -102,7 +101,7 @@ def exportcsv():
 
 @application.route("/")
 def index():
-    return render_template("input.html");   
+    return render_template("input.html");
 
 if __name__ == '__main__':
-    application.run(host='0.0.0.0', debug=True)
+    application.run(host='0.0.0.0')   

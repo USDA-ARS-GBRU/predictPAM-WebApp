@@ -40,6 +40,6 @@ RUN  python3 ./setup.py install
 RUN echo "source activate predictenv" > ~/.bashrc
 ENV PATH /opt/conda/envs/predictenv/bin:$PATH
 
-EXPOSE 8000
+EXPOSE 8080
 
 ENTRYPOINT ["./app/boot.sh"]

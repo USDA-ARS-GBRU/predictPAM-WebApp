@@ -1,0 +1,4 @@
+.git
+.DockerfileBackup
+__pycache__
+.DS_Store
