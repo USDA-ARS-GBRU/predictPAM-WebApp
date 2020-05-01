@@ -10,13 +10,11 @@ from serverside.serverside_table import ServerSideTable
 from serverside import table_schemas
 import predictPAM.main
 from flask import Blueprint, jsonify, request
+import logging
+import uuid
 
-APP_ROOT = os.path.dirname(os.path.abspath(__file__))
-UPLOAD_FOLD = '/Users/anushkaswarup/Downloads/Storage/EPI/WebAppPAM/app/'
-UPLOAD_FOLD = os.getcwd()+"/"
-
-UPLOAD_FOLDER = os.path.join(APP_ROOT, UPLOAD_FOLD)
-ALLOWED_EXTENSIONS = {'gbk','gb'}
+UPLOAD_FOLDER = os.getcwd()
+ALLOWED_EXTENSIONS = {'gbk','gb','gz'}
 
 class objectview(object):
     def __init__(self, d):
@@ -26,55 +24,85 @@ def collect_data_serverside(self, request):
         columns = table_schemas.SERVERSIDE_TABLE_COLUMNS
         return ServerSideTable(request, data_dict, columns).output_result()
 
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 
 application = Flask(__name__,
            template_folder="templates")
 application.secret_key = 'go gators'
+application.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+if __name__ != '__main__':
+    gunicorn_logger = logging.getLogger('gunicorn.error')
+    application.logger.handlers = gunicorn_logger.handlers
+    
+    file_handler = logging.FileHandler('server.log')
+    file_handler.setLevel(logging.DEBUG)
+
+    application.logger.addHandler(file_handler)
+
+    application.logger.setLevel(gunicorn_logger.level)
+
 
 @application.route('/handle_form', methods=['POST'])
 def handle_form():
+    try:
+        files = request.files.getlist("file[]")
+        gbkfileloc = []
+        for file in files:
+            if file and allowed_file(file.filename):
+                filename = str(uuid.uuid4())+'.'+file.filename.rsplit('.', 1)[1].lower()
+                print(filename)
+                file.save(os.path.join(application.config['UPLOAD_FOLDER'], filename))
+                gbkfileloc.append(os.path.join(application.config['UPLOAD_FOLDER'], filename))
 
-    print('on submit')
 
-    files = request.files.getlist("file[]")
-    for file in files:
-        file.save(secure_filename(file.filename))
-        print("Hi "+os.getcwd())
+        pamSeq = request.form['pamseq']
+        tarLength = int(request.form['targetLength'])
+        strand  = request.form['strand']
+        orient = request.form['orient']
 
+        strandStr = None
 
-    pamSeq = request.form['pamseq']
-    tarLength = int(request.form['targetLength'])
-    strand  = request.form['strand']
+        if(strand=='1'):
+            strandStr = 'forward'
+        elif(strand=='2'):
+            strandStr = 'reverse'
+        elif(strand=='3'):
+            strandStr = 'both'
 
-    strand_str = None
+        #add pamOrient to data dictionary when guidefinder integrated
 
-    if(strand=='1'):
-        strand_str = 'forward'
-    elif(strand=='2'):
-        strand_str = 'reverse'
+        pamOrient = None
 
-    lcp = int(request.form['lcp']) 
-    eds = int(request.form['eds'])
+        if(strand=='1'):
+            pamOrient = '5prime'
+        elif(strand=='2'):
+            pamOrient = '3prime'
 
-    gbkfileloc = []
-    for file in files:
-        gbkfile = UPLOAD_FOLD+file.filename
-        gbkfileloc.append(gbkfile)
+        lcp = int(request.form['lcp']) 
+        eds = int(request.form['eds'])
 
-    out = request.form['Output']
+        out = request.form['Output']
 
-    print("gbkfileloc: "+gbkfileloc[0])
+        print("gbkfileloc: "+gbkfileloc[0])
 
-    data = {"gbkfile":gbkfileloc, "pamseq":pamSeq, "targetlength":tarLength,
-    "strand":strand_str, "lcp":lcp,"eds":eds, "outfile":out, "tempdir":None, "threads":1, "log":"predictpam.log"}
+        data = {"gbkfile":gbkfileloc, "pamseq":pamSeq, "targetlength":tarLength,
+        "strand":strandStr, "lcp":lcp,"eds":eds, "outfile":out, "tempdir":None, "threads":1, "log":"predictpam.log"}
 
-    data_obj = objectview(data)
+        data_obj = objectview(data)
 
-    predictPAM.main.main(data_obj)
+        predictPAM.main.main(data_obj)
 
-    session['output_file'] = out
+        session['output_file'] = out
 
-    return render_template("serverside_table.html");
+        return render_template("serverside_table.html");
+
+    except Exception as e:
+        print("An error occurred in predictPAM")
+        raise e
 
 
 @application.route("/serverside", methods=['GET'])
@@ -101,6 +129,7 @@ def exportcsv():
 
 @application.route("/")
 def index():
+    application.logger.info('Start')
     return render_template("input.html");
 
 if __name__ == '__main__':

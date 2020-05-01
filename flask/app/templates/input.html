@@ -22,6 +22,7 @@
 
             else {
                 console.log("passed")
+                $('#loading').show();
                 return true;
                 }
             }
@@ -88,11 +89,20 @@
       <input class="form-control form-control-lg" name="targetLength" id="targetLength" type="number" value="22" max="30" min="10"><br>
          
       <div class="form-control-label" style="font-size: 26px">Strand</div>
-      <small id="fileHelp" class="form-text text-muted">Strand of DNA to search for PAM motif. Default is forward. Options: {forward, reverse}.</small>
+      <small id="fileHelp" class="form-text text-muted">Strand of DNA to search for PAM motif. Default is forward. Options: {forward, reverse, forward+reverse}.</small>
         <select class="form-control form-control-lg" name="strand" required="true">
         <option value="" selected="selected">None Selected</option>
         <option value="1">Forward</option>
         <option value="2">Reverse</option>
+        <option value="3">Forward+Reverse</option>
+        </select><br>
+
+      <div class="form-control-label" style="font-size: 26px">Pam Orientation</div>
+      <small id="fileHelp" class="form-text text-muted">PAM position relative to target: 5prime: [PAM][target], 3prime: [target][PAM], Cas9 for example is 5prime. Default is 5prime. Options: {5prime, 3prime}.</small>
+        <select class="form-control form-control-lg" name="orient" required="true">
+        <option value="" selected="selected">None Selected</option>
+        <option value="1">5prime</option>
+        <option value="2">3prime</option>
         </select><br>
         <!--  <input class="form-control form-control-lg" name="strand" type="text"><br> -->
       <div class="form-control-label" style="font-size: 26px">LCP</div>
@@ -119,7 +129,7 @@
       <small id="fileHelp" class="form-text text-muted">The table of pam sites and data. Required.</small>
       <input class="form-control form-control-lg" name="Output" type="string" value="out.txt">
 
-      <input class="btn btn-outline-primary" style="margin-top: 20px" type="submit" value="Submit" onclick="$('#loading').show();">
+      <input class="btn btn-outline-primary" style="margin-top: 20px" type="submit" value="Submit">
       <div class="loader-container">
         <div class="loader"></div>
       </div>

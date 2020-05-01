@@ -11,20 +11,22 @@ RUN eval $(ssh-agent) && \
 
 FROM continuumio/miniconda:latest
 
-COPY . /app
+COPY app /app
 WORKDIR /app
 
-RUN chmod +x ./app/boot.sh
+RUN chmod +x ./boot.sh
 
-RUN conda env create -f ./app/environment.yml
+RUN conda env create -f ./environment.yml
 
 SHELL ["conda", "run", "-n", "predictenv", "/bin/bash", "-c"]
 
-RUN conda install -c bioconda pysam && \
+RUN conda update -n base -c defaults conda && \
+	conda install -c bioconda pysam && \
 	conda install flask && \
-	conda install requests && \
-	conda install -c anaconda libgfortran  && \
+	conda install requests  && \
 	conda install -c anaconda psutil
+	
+RUN conda install -c poppy-project libgfortran
 
 RUN	pip install pip==9.0.3 pybind11 && \
 	pip install -U Werkzeug
@@ -42,4 +44,4 @@ ENV PATH /opt/conda/envs/predictenv/bin:$PATH
 
 EXPOSE 8080
 
-ENTRYPOINT ["./app/boot.sh"]
+ENTRYPOINT ["./boot.sh"]
