@@ -12,6 +12,8 @@ import predictPAM.main
 from flask import Blueprint, jsonify, request
 import logging
 import uuid
+from io import StringIO
+import csv
 
 UPLOAD_FOLDER = os.getcwd()
 ALLOWED_EXTENSIONS = {'gbk','gb','gz'}
@@ -120,12 +122,29 @@ def serverside_table_content():
 
 @application.route("/exportcsv", methods=['GET', 'POST'])
 def exportcsv():
-  out = session.get('output_file', None)
-  df = pd.read_csv(out, sep="\t", header=0)
-  resp = make_response(df.to_csv())
-  resp.headers["Content-Disposition"] = ("attachment; filename=%s" % out)
-  resp.headers["Content-Type"] = "text/csv"
-  return resp
+    out = session.get('output_file', None)
+    df = pd.read_csv(out, sep="\t", header=0)
+    resp = make_response(df.to_csv())
+    resp.headers["Content-Disposition"] = ("attachment; filename=%s" % out)
+    resp.headers["Content-Type"] = "text/csv"
+    return resp
+
+@application.route("/exportlogs", methods=['GET', 'POST'])
+def exportlogs():
+    log = []
+    with open('server.log', "r") as file:
+        for line in file.readlines():
+            log.append(line.rstrip())
+
+    si = StringIO()
+    cw = csv.writer(si)
+    cw.writerows(log)
+    resp = make_response(si.getvalue())
+
+    resp.headers["Content-Disposition"] = ("attachment; filename=server.txt")
+    resp.headers["Content-Type"] = "text/csv"
+    return resp
+
 
 @application.route("/")
 def index():
